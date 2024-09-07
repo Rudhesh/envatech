@@ -1,9 +1,6 @@
-import Login from "./login/page";
+import {redirect} from 'next/navigation';
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-     <Login/>
-    </main>
-  );
+// This page only renders when the app is built statically (output: 'export')
+export default function RootPage() {
+  redirect('/en');
 }
