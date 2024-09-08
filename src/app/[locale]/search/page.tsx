@@ -6,8 +6,7 @@ export default async function Search() {
 
     return (
         <Layout >
-                      {/* <TreeViewSearch /> */}
-                      Sreach
+                      <TreeViewSearch />
             
         </Layout>
     )
