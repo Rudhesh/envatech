@@ -54,17 +54,14 @@ const dummyData: DataPoint[] = [
   },
 ];
 
-export async function getUsers(): Promise<DataPoint[]> {
-  // Replace actual fetch call with dummy data for testing
-  return dummyData;
-}
+
 
 
 export default async function Panel() {
-  const data = await getUsers();
+  // const data = await getUsers();
   return (
     <Layout>
-      <EditPanel data={data} />
+      <EditPanel data={dummyData} />
     </Layout>
   );
 }
