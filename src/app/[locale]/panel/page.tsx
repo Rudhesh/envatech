@@ -12,11 +12,24 @@ interface DataPoint {
   // Add other properties from your JSON data if needed
 }
 async function getUsers(): Promise<any> {
-  const apiUrl = process.env.NEXTAUTH_URL
-  const res = await fetch(`${apiUrl}/api/dataPartition`);
-  console.log("aaaa",`${apiUrl}/api/dataPartition`)
-  const data = await res.json();
+  const apiUrl = process.env.NEXTAUTH_URL || `https://${process.env.VERCEL_URL}`;
+
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Running in production. Skipping API fetch for now.');
+    return []; // Returning an empty array for testing
+  }
+
+  try {
+    const res = await fetch(`${apiUrl}/api/dataPartition`);
+    const data = await res.json();
     return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Failed to fetch data:", error.message);
+    } else {
+      console.error("Unexpected error:", error);
+    }
+  }
 }
 
 const dummyData: DataPoint[] = [
