@@ -14,10 +14,10 @@ interface DataPoint {
 async function getUsers(): Promise<any> {
   const apiUrl = process.env.NEXTAUTH_URL || `https://${process.env.VERCEL_URL}`;
 
-  if (process.env.NODE_ENV === 'production') {
-    console.log('Running in production. Skipping API fetch for now.');
-    return []; // Returning an empty array for testing
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   console.log('Running in production. Skipping API fetch for now.');
+  //   return []; // Returning an empty array for testing
+  // }
 
   try {
     const res = await fetch(`${apiUrl}/api/dataPartition`);
