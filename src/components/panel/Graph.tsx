@@ -27,7 +27,6 @@ const Graph: React.FC<any> = ({ data }) => {
     x: new Date(d.time_stamp).getTime(),
     y: d.value,
   }));
-console.log(parsedData)
   const options = {
     chart: {
       type: "line",

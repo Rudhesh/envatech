@@ -45,7 +45,6 @@ export const initiatePasswordReset = createAsyncThunk(
       // Handle response, possibly show a success message
       const data = await response.data;
       return data
-console.log(data)
     } catch (error) {
       throw error;
     }

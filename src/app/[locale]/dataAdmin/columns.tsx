@@ -35,7 +35,6 @@ export const columns: ColumnDef<UserWithPermission>[] = [
       const user = row.original;
 
 function populate() {
-  console.log(user.userPermissions)
 }
       return (
         <>

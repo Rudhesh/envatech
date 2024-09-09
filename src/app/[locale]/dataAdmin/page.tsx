@@ -13,7 +13,7 @@ export default async function DataAdmin() {
   const data = await userPermission();
 
   const session = await getServerSession(authOptions);
-  console.log("dataAdmin", session?.user);
+  // console.log("dataAdmin", session?.user);
   if (!session || !session.user || !session.user.role.includes("DataAdmin")) {
     // Redirect to login or show unauthorized message
 

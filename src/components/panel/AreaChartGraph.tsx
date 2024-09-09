@@ -57,14 +57,12 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const AreaChartGraph: React.FC<any> = ({ data }) => {
-  console.log(data)
   // Generate dummy data
   // const data = generateData();
   const [timeRange, setTimeRange] = React.useState("90d");
 
   const filteredData = data.filter((item: { time_stamp: string | number | Date; }) => {
     const date = new Date(item.time_stamp);
-    console.log({date})
     const now = new Date();
     let daysToSubtract = 365;
     if (timeRange === "30d") {
@@ -75,7 +73,6 @@ const AreaChartGraph: React.FC<any> = ({ data }) => {
     now.setDate(now.getDate() - daysToSubtract);
     return date >= now;
   });
-console.log({filteredData})
 //   // Parse the data
 //   const parsedData = data.map((d: { time_stamp: string | number | Date; value: any; }) => ({
 //     x: new Date(d.time_stamp).getTime(),

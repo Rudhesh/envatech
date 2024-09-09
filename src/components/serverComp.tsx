@@ -17,7 +17,6 @@ const ServerComp = () => {
       dispatch(fetchUserData());
     }, []);
   
-  console.log(data1)
   const data = data1.user
   return (
     <div> <DataTable columns={columns} data={data} /></div>

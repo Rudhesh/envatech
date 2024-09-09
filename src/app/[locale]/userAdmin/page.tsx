@@ -14,7 +14,6 @@ export default async function UserAdmin() {
   const data =  await getUsers();
   const session = await getServerSession(authOptions)
   console.log("role",session?.user)
-  console.log({data})
   if (!session || !session.user || !session.user.role.includes('admin')) {
     // Redirect to login or show unauthorized message
     redirect("/");

@@ -21,7 +21,6 @@ const ChangeEmail = ({ user }: any) => {
   const currentEmail = session?.user.email;
 // const currentEmail = user.email
 // const userId = user.userId
-console.log({user})
   // async function handleUpdateEmail() {
   //   try {
   //     const code = await getchangeemailcode(userId, newEmail, currentEmail);

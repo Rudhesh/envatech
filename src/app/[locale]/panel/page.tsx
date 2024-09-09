@@ -11,13 +11,13 @@ interface DataPoint {
   status: string;
   // Add other properties from your JSON data if needed
 }
-// async function getUsers(): Promise<any> {
-//   const apiUrl = process.env.NEXTAUTH_URL
-//   const res = await fetch(`${apiUrl}/api/dataPartition`);
-//   const data = await res.json();
-//   console.log("DATA",data)
-//     return data;
-// }
+async function getUsers(): Promise<any> {
+  const apiUrl = process.env.NEXTAUTH_URL
+  const res = await fetch(`${apiUrl}/api/dataPartition`);
+  console.log("aaaa",`${apiUrl}/api/dataPartition`)
+  const data = await res.json();
+    return data;
+}
 
 const dummyData: DataPoint[] = [
   {
@@ -58,10 +58,10 @@ const dummyData: DataPoint[] = [
 
 
 export default async function Panel() {
-  // const data = await getUsers();
+  const data = await getUsers();
   return (
     <Layout>
-      <EditPanel data={dummyData} />
+      <EditPanel data={data} />
     </Layout>
   );
 }

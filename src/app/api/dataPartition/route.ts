@@ -12,7 +12,6 @@ export async function GET() {
   
       // Convert the result to JSON
       const data = JSON.stringify(users);
-      console.log({ data });
   
       // Return the response with the data
       return NextResponse.json(data, { status: 200 });

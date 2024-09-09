@@ -22,11 +22,9 @@ export const addData = async (e: FormData) => {
     role,
     password,
   };
-console.log({newData})
   const userRepository = useCreateUserRepository();
   try {
    const data =  await userRepository.create(newData);
-   console.log({data})
     console.log('User created successfully');
 return data
   } catch (error: unknown) {

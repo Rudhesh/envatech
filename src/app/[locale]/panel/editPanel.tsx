@@ -37,14 +37,11 @@ interface GraphProps {
 }
 
 const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
-  console.log({ data });
   const [originalData, setOriginalData] = useState<DataPoint[]>([]); // Original data from the server
   const [graphType, setGraphType] = useState("AreaChart"); // State to manage graph type
 
   const filterData = useAppSelector((state) => state.filterData);
   const dispatch = useAppDispatch();
-  console.log({ filterData });
-
   useEffect(() => {
     setOriginalData(data);
     dispatch(setFilteredData(data)); // Initialize filteredData with data from props
@@ -52,14 +49,12 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
   }, [data, dispatch]);
 
   // Inside the EditPanel component
-  console.log({ originalData });
   const [panelName, setPanelName] = useState("");
   useEffect(() => {
     // Fetch data from your server and set it to both originalData and filteredData
     // Example: axios.get('/api/data').then((response) => setOriginalData(response.data));
     setOriginalData(data);
     const savedPanel = localStorage.getItem("savedPanel");
-    console.log({ savedPanel });
     if (savedPanel) {
       const parsedPanel = JSON.parse(savedPanel);
       setPanelName(parsedPanel.name);
@@ -113,10 +108,8 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
         new Date(item.time_stamp) >= new Date(startTime) &&
         new Date(item.time_stamp) <= new Date(endTime)
     );
-    console.log({ filtered });
     dispatch(setFilteredData(filtered));
   };
-  console.log(filterData.filteredData);
 
   const renderGraph = () => {
     switch (graphType) {
