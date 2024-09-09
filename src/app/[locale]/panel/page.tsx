@@ -12,7 +12,7 @@ interface DataPoint {
   // Add other properties from your JSON data if needed
 }
 async function getUsers(): Promise<any> {
-  const apiUrl = process.env.NEXTAUTH_URL || `https://${process.env.VERCEL_URL}`;
+  const apiUrl = process.env.NEXTAUTH_URL;
 
   // if (process.env.NODE_ENV === 'production') {
   //   console.log('Running in production. Skipping API fetch for now.');
