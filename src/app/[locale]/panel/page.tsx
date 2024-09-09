@@ -74,7 +74,7 @@ export default async function Panel() {
   const data = await getUsers();
   return (
     <Layout>
-      <EditPanel data={data} />
+      <EditPanel data={dummyData} />
     </Layout>
   );
 }
