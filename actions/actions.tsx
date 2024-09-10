@@ -1,6 +1,6 @@
 "use server"
 import { revalidatePath, revalidateTag } from "next/cache";
-import { useCreateUserRepository, useDataElementsRepository, useDeleteUserRepository, useUsersRepository, useUsersWithPermissionRepository } from "../repositories/useRepository";
+import { useCreateUserRepository, useDataElementsRepository, usedataRepository, useDeleteUserRepository, useUsersRepository, useUsersWithPermissionRepository } from "../repositories/useRepository";
 import base64 from "base-64";
 import axios from "axios";
 
@@ -170,6 +170,14 @@ export const dataTree = async () => {
 export const userData = async () => {
   const userRepository = useUsersRepository();
   const data = await userRepository.getAll();
+  return data
+
+}
+
+export const userRawData = async () => {
+  const userRepository = usedataRepository();
+  const data = await userRepository.getAll();
+  console.log(data)
   return data
 
 }

@@ -1,23 +1,20 @@
-import ServerlessMysql from "serverless-mysql";
-
-const db = ServerlessMysql({
-  config: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-  },
-});
+import mysql from "mysql2/promise";
 
 export async function query({ query, values = [] }) {
+
+    const dbconnection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+      });
+
   try {
-    // Run the query
-    const results = await db.query(query, values);
-    // Close the connection
-    await db.end();
+    const [results] = await dbconnection.execute(query, values);
+    dbconnection.end();
     return results;
   } catch (error) {
-    console.error("Database query error:", error);
-    throw new Error(error.message);
+    throw Error(error.message);
+    return { error };
   }
 }

@@ -27,6 +27,17 @@ console.log(apiUrl)
   return useGenericRepository<TreeNode>(apiUrl);
 };
 
+
+export const usedataRepository = () => {
+  const NEXTAUTH_URL = process.env.NEXTAUTH_URL
+
+  // const apiUrl = 'http://localhost:3030/api/treenodes'; 
+  const apiUrl = `${NEXTAUTH_URL}/api/dataPartition`; 
+console.log(apiUrl)
+  return useGenericRepository<any>(apiUrl);
+};
+
+
 export const useDeleteUserRepository = () => {
   const NEXTAUTH_URL = process.env.NEXTAUTH_URL
 
