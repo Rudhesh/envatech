@@ -6,7 +6,7 @@ export default async function Search() {
 
     return (
         <Layout >
-                      {/* <TreeViewSearch /> */}
+                      <TreeViewSearch />
                       Search
             
         </Layout>

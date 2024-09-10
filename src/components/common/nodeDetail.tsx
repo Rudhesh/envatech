@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import { TreeNode } from '../../types/types';
-import { LatLngExpression } from 'leaflet';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Share2 } from 'lucide-react';
 import { Trash2 } from 'lucide-react';
-import MapComponent from './mapComponent';
+// import MapComponent from './mapComponent';
 
+import dynamic from 'next/dynamic';
 
+const DynamicMapComponent = dynamic(() => import('./mapComponent'), {
+  ssr: false,
+});
 const NodeDetail: React.FC<{ node: TreeNode; path: string[]; childNodeCount: any; }> = ({ node, path, childNodeCount }) => {
 
   const attributeCount = node.dataElementAttributes.length;
@@ -28,7 +31,6 @@ const NodeDetail: React.FC<{ node: TreeNode; path: string[]; childNodeCount: any
   const longitude = node.dataElementAttributes.find(attribute => attribute.kind === "GeoCoordinate")?.longitude || 13.4050;
   const Add = node.dataElementAttributes.find(attribute => attribute.kind === "Address")?.city || "Berlin";
 
-  const position: LatLngExpression = [latitude, longitude];
 
   const groups = childNodeCount.map((group: TreeNode, index: any) => (
     !group.dataPartitions ? <span key={`group-${index}`} className="dark:text-white dark:border-white">{group.name}, </span> : null
@@ -159,7 +161,7 @@ const NodeDetail: React.FC<{ node: TreeNode; path: string[]; childNodeCount: any
           <Table>
             <TableBody>
               <TableRow>
-                <MapComponent latitude={latitude} longitude={longitude} address={Add} />
+                <DynamicMapComponent latitude={latitude} longitude={longitude} address={Add} />
               </TableRow>
             </TableBody>
           </Table>
