@@ -21,9 +21,9 @@ export const useUsersWithPermissionRepository = () => {
 export const useDataElementsRepository = () => {
   const NEXTAUTH_URL = process.env.NEXTAUTH_URL
 
-  const apiUrl = 'http://localhost:3030/api/treenodes'; 
-  // const apiUrl = `${NEXTAUTH_URL}/api/datatree`; 
-
+  // const apiUrl = 'http://localhost:3030/api/treenodes'; 
+  const apiUrl = `${NEXTAUTH_URL}/api/treenodes`; 
+console.log(apiUrl)
   return useGenericRepository<TreeNode>(apiUrl);
 };
 
