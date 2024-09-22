@@ -26,7 +26,6 @@ const DatabaseConnectionForm = () => {
     e.preventDefault();
     setFormData(formData);
   };
-  console.log(formData)
 
   return (
     <form onSubmit={handleSubmit}>

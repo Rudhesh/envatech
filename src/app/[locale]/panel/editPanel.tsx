@@ -20,6 +20,8 @@ import LineChartGraph from "@/components/panel/LineChartGraph";
 import BarChartGraph from "@/components/panel/BarChartGraph";
 import GraphTypeButtons from "@/components/ui/graphTypeButtons";
 import RadarChartGraph from "@/components/panel/RadarChartGraph";
+import { Card } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 interface DataPoint {
   id: number;
@@ -28,7 +30,6 @@ interface DataPoint {
   min: number;
   max: string;
   status: string;
-  // Add other properties from your JSON data if needed
 }
 
 interface GraphProps {
@@ -37,63 +38,62 @@ interface GraphProps {
 }
 
 const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
-  const [originalData, setOriginalData] = useState<DataPoint[]>([]); // Original data from the server
-  const [graphType, setGraphType] = useState("AreaChart"); // State to manage graph type
+  const router = useRouter();
+
+  const [originalData, setOriginalData] = useState<DataPoint[]>([]);
+  const [graphType, setGraphType] = useState("AreaChart");
 
   const filterData = useAppSelector((state) => state.filterData);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     setOriginalData(data);
-    dispatch(setFilteredData(data)); // Initialize filteredData with data from props
-    // Rest of your useEffect logic...
+    dispatch(setFilteredData(data));
   }, [data, dispatch]);
 
-  // Inside the EditPanel component
   const [panelName, setPanelName] = useState("");
+
   useEffect(() => {
-    // Fetch data from your server and set it to both originalData and filteredData
-    // Example: axios.get('/api/data').then((response) => setOriginalData(response.data));
-    setOriginalData(data);
     const savedPanel = localStorage.getItem("savedPanel");
     if (savedPanel) {
       const parsedPanel = JSON.parse(savedPanel);
       setPanelName(parsedPanel.name);
       setFilteredData(parsedPanel.data);
+      setGraphType(parsedPanel.graphType); // Set graphType from saved panel
     }
-  }, []);
+  }, [data]);
 
   const generateUniqueId = () =>
     `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
   const handleSavePanel = () => {
-    const uniqueId = generateUniqueId(); // Generate a unique ID for the new panel
+    const uniqueId = generateUniqueId();
     const newPanel = {
       id: uniqueId,
       name: panelName,
       data: filterData,
+      graphType, // Save the selected graph type
     };
 
-    // Retrieve existing panels
     const savedPanels = JSON.parse(localStorage.getItem("savedPanels") || "{}");
-
-    // Add the new panel
     savedPanels[uniqueId] = newPanel;
-
-    // Save the updated panels back to localStorage
+    console.log({savedPanels})
     localStorage.setItem("savedPanels", JSON.stringify(savedPanels));
+
+    router.push("/dashboard");
+  };
+
+  const handleDashboard = () => {
+    router.push("/dashboard");
   };
 
   const handleClearSavedPanel = () => {
-    // Clear the saved panel from localStorage
     localStorage.removeItem("savedPanel");
   };
-
-  // Add this input field in your component
 
   const handleSearch = (query: string) => {
     const filtered = originalData.filter(
       (item) =>
-        // Implement your search logic here
         item.id.toString().includes(query) ||
         item.value.toString().includes(query) ||
         item.time_stamp.includes(query)
@@ -104,7 +104,6 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
   const handleTimeRange = (startTime: string, endTime: string) => {
     const filtered = originalData.filter(
       (item) =>
-        // Check if the time_stamp is within the specified range
         new Date(item.time_stamp) >= new Date(startTime) &&
         new Date(item.time_stamp) <= new Date(endTime)
     );
@@ -117,92 +116,89 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
         return <LineChartGraph data={filterData.filteredData} />;
       case "BarChart":
         return <BarChartGraph data={filterData.filteredData} />;
+      case "RadarChart":
+        return <RadarChartGraph data={filterData.filteredData} />;
       case "AreaChart":
       default:
         return <AreaChartGraph data={filterData.filteredData} />;
-      case "RadarChart":
-     
-        return <RadarChartGraph data={filterData.filteredData} />;
     }
   };
 
   return (
-    <div className="dark:text-white flex h-screen">
+    <div className="dark:text-white flex h-screen border">
       <ResizablePanelGroup direction="horizontal" className="max-w-screen">
         <ResizablePanel defaultSize={80}>
           <ResizablePanelGroup direction="vertical">
-            <div className="flex justify-between items-center  p-4 m-2">
-              <Input
-                type="text"
-                placeholder="Enter Panel Name"
-                value={panelName}
-                onChange={(e) => setPanelName(e.target.value)}
-                style={{ width: "300px" }} // Inline style for width
-              />
-
+            <div className="flex justify-between items-center border p-2 ">
               {name ? (
                 <Input
                   type="text"
                   placeholder="Enter Panel Name"
                   value={name}
                   onChange={(e) => setPanelName(e.target.value)}
-                  style={{ width: "300px" }} // Inline style for width
+                  style={{ width: "200px"}} // Remove borders
                 />
               ) : null}
+              <Input
+                type="text"
+                placeholder="Enter Panel Name"
+                value={panelName}
+                onChange={(e) => setPanelName(e.target.value)}
+                style={{ width: "200px" }}
+              />
 
               <div className="flex">
-                {" "}
                 <div className="mr-4">
                   <SearchBar onSearch={handleSearch} />
-                </div>{" "}
+                </div>
                 <AbsoluteTimeRange onApply={handleTimeRange} />
               </div>
             </div>
 
             <ResizablePanel defaultSize={40}>
-              <div className=" p-4 m-2">
-                {/* <div className="flex space-x-2 mb-4">
-              <GraphTypeButtons graphType={graphType} setGraphType={setGraphType} />
-                </div> */}
-                {renderGraph()}
-              </div>
+              <Card className=" p-2 ">{renderGraph()}</Card>
             </ResizablePanel>
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={60}>
-              <div
-                className="p-4 m-2"
+              <Card
+                className="p-4"
                 style={{ height: "100%", overflow: "auto" }}
               >
                 <DataTable columns={columns} data={filterData.filteredData} />
-              </div>
+              </Card>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={20}>
-          <div className="  p-4 m-2 ">
-            {" "}
-            <div className="flex space-x-2 mb-4">
-
-            <Button variant="outline" className=" px-4 py-2 ">
-              Share
-            </Button>
-            <Button
-              onClick={handleClearSavedPanel}
-              variant="outline"
-              className=" px-4 py-2 "
-            >
-              Delete
-            </Button>
-            <Button
-              onClick={handleSavePanel}
-              variant="outline"
-              className=" px-4 py-2 "
-            >
-              Save
-            </Button>
+          <div className="">
+            <div className="flex justify-between items-center border p-2">
+              {/* <Button variant="outline" className="px-4 py-2">
+                Share
+              </Button> */}
+              <h3 className="text-lg font-semibold">Visualization</h3>
+              <div>
+                <Button
+                  onClick={handleClearSavedPanel}
+                  variant="outline"
+                  className="mx-1"
+                >
+                  Discard
+                </Button>
+                <Button
+                  onClick={handleSavePanel}
+                  variant="outline"
+                  className="mx-1"
+                >
+                  Save
+                </Button>
+                <Button onClick={handleDashboard}>Back</Button>
+              </div>
             </div>
-            <GraphTypeButtons graphType={graphType} setGraphType={setGraphType} />
+            <GraphTypeButtons
+              graphType={graphType}
+              setGraphType={setGraphType}
+            />
             <Sidebar />
           </div>
         </ResizablePanel>

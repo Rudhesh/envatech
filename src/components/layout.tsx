@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     
       <div className="flex">
         <NavBar  />
-        <div  className="w-screen p-10" >
+        <div  className="w-screen pt-10" >
           {children}
         </div>
       </div>

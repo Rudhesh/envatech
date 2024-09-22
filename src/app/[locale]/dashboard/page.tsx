@@ -33,7 +33,7 @@ if (!session || !session.user) {
     <Layout>
       <section className="py-4 w-full">
       
-      <h1 className="text-2x1 font-bold my-2">{t("title")}</h1>
+      {/* <h1 className="text-2x1 font-bold my-2">{t("title")}</h1> */}
         {/* <p>{t("title")}</p>
         {t.rich('description', {
           code: (chunks) => (

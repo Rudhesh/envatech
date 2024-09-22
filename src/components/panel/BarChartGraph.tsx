@@ -31,8 +31,8 @@ const chartConfig = {
 
 const BarChartGraph: React.FC<any> = ({ data }) => {
   return (
-    <Card>
-      <CardHeader>
+    <div>
+      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <CardTitle>Bar Chart - Multiple</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
@@ -71,7 +71,7 @@ const BarChartGraph: React.FC<any> = ({ data }) => {
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </div>
   )
 }
 export default BarChartGraph;

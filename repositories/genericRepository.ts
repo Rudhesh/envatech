@@ -47,7 +47,7 @@ export const useGenericRepository = <T extends string | Record<string, any> | un
   const getAll = async (options?: RequestOptions): Promise<T[]> => {
     try {
       const response = await makeRequest(apiUrl, options);
-
+console.log({response})
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(`Failed to fetch data. Status: ${response.status}. Message: ${errorMessage}`);

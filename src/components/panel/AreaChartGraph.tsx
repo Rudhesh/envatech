@@ -58,7 +58,6 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const AreaChartGraph: React.FC<any> = ({ data }) => {
-  console.log({data})
   // Generate dummy data
   // const data = generateData();
   const [timeRange, setTimeRange] = React.useState("90d");
@@ -104,7 +103,7 @@ const AreaChartGraph: React.FC<any> = ({ data }) => {
 //   );
 
 return (
-  <Card>
+  <div>
   <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
     <div className="grid flex-1 gap-1 text-center sm:text-left">
       <CardTitle>Area Chart - Interactive</CardTitle>
@@ -211,7 +210,7 @@ return (
       </AreaChart>
     </ChartContainer>
   </CardContent>
-</Card>
+</div>
 )
 };
 

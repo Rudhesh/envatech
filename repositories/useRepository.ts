@@ -23,7 +23,6 @@ export const useDataElementsRepository = () => {
 
   // const apiUrl = 'http://localhost:3030/api/treenodes'; 
   const apiUrl = `${NEXTAUTH_URL}/api/treenodes`; 
-console.log(apiUrl)
   return useGenericRepository<TreeNode>(apiUrl);
 };
 
@@ -33,7 +32,7 @@ export const usedataRepository = () => {
 
   // const apiUrl = 'http://localhost:3030/api/treenodes'; 
   const apiUrl = `${NEXTAUTH_URL}/api/dataPartition`; 
-console.log(apiUrl)
+  console.log("first",apiUrl)
   return useGenericRepository<any>(apiUrl);
 };
 

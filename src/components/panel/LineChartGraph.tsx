@@ -17,14 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-]
+
 
 const chartConfig = {
   desktop: {
@@ -39,10 +32,13 @@ const chartConfig = {
 
 const LineChartGraph: React.FC<any> = ({ data }) => {
   return (
-    <Card>
-    <CardHeader>
+    <div>
+    <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
+    <div className="grid flex-1 gap-1 text-center sm:text-left">
+
       <CardTitle>Line Chart - Multiple</CardTitle>
       <CardDescription>January - June 2024</CardDescription>
+      </div>
     </CardHeader>
     <CardContent>
       <ChartContainer config={chartConfig}>
@@ -99,7 +95,7 @@ const LineChartGraph: React.FC<any> = ({ data }) => {
         </div>
       </div>
     </CardFooter>
-  </Card>
+  </div>
   )
 }
 export default LineChartGraph;

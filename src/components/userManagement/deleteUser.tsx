@@ -14,7 +14,6 @@ import {Trash2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast"
 
 const DeleteUser = ({ user }:any) => {
-console.log("id",user._id)
   async function clientAction() {
     const numb = "6543b712e1b13490988646f7"
     const result = await handleDelete(user._id);

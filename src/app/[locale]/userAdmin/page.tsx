@@ -13,7 +13,6 @@ export default async function UserAdmin() {
   const t = await getTranslations('User-admin');
   const data =  await getUsers();
   const session = await getServerSession(authOptions)
-  console.log("role",session?.user)
   if (!session || !session.user || !session.user.role.includes('admin')) {
     // Redirect to login or show unauthorized message
     redirect("/");

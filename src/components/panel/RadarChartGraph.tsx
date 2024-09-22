@@ -31,7 +31,7 @@ const chartConfig = {
 
 const RadarChartGraph: React.FC<any> = ({ data }) => {
   return (
-    <Card>
+    <>
       <CardHeader className="items-center pb-4">
         <CardTitle>Radar Chart - Lines Only</CardTitle>
         <CardDescription>
@@ -86,7 +86,7 @@ const RadarChartGraph: React.FC<any> = ({ data }) => {
           January - June 2024
         </div>
       </CardFooter>
-    </Card>
+    </>
   )
 }
 export default RadarChartGraph;
