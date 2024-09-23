@@ -22,6 +22,8 @@ import GraphTypeButtons from "@/components/ui/graphTypeButtons";
 import RadarChartGraph from "@/components/panel/RadarChartGraph";
 import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface DataPoint {
   id: number;
@@ -42,6 +44,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
 
   const [originalData, setOriginalData] = useState<DataPoint[]>([]);
   const [graphType, setGraphType] = useState("AreaChart");
+  const [showTable, setShowTable] = useState(true); // New state to toggle the table
 
   const filterData = useAppSelector((state) => state.filterData);
   const dispatch = useAppDispatch();
@@ -133,7 +136,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
               {name ? (
                 <Input
                   type="text"
-                  placeholder="Enter Panel Name"
+                  placeholder="Enter New Panel Name"
                   value={name}
                   onChange={(e) => setPanelName(e.target.value)}
                   style={{ width: "200px"}} // Remove borders
@@ -146,8 +149,19 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
                 onChange={(e) => setPanelName(e.target.value)}
                 style={{ width: "200px" }}
               />
+            
+              
 
               <div className="flex">
+              <div className="mr-4">
+              <Button
+                onClick={() => setShowTable((prev) => !prev)} // Toggle the state
+                variant="outline"
+                className="w-full"
+              >
+                {showTable ? "Hide Table" : "Show Table"}
+              </Button>
+            </div>
                 <div className="mr-4">
                   <SearchBar onSearch={handleSearch} />
                 </div>
@@ -155,18 +169,19 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
               </div>
             </div>
 
-            <ResizablePanel defaultSize={40}>
+            <ResizablePanel defaultSize={65}>
               <Card className=" p-2 ">{renderGraph()}</Card>
             </ResizablePanel>
             <ResizableHandle withHandle />
-            <ResizablePanel defaultSize={60}>
+
+           {showTable && <ResizablePanel defaultSize={35}>
               <Card
                 className="p-4"
                 style={{ height: "100%", overflow: "auto" }}
               >
                 <DataTable columns={columns} data={filterData.filteredData} />
               </Card>
-            </ResizablePanel>
+            </ResizablePanel>}
           </ResizablePanelGroup>
         </ResizablePanel>
         <ResizableHandle withHandle />

@@ -41,7 +41,7 @@ const LineChartGraph: React.FC<any> = ({ data }) => {
       </div>
     </CardHeader>
     <CardContent>
-      <ChartContainer config={chartConfig}>
+      <ChartContainer config={chartConfig} >
         <LineChart
           accessibilityLayer
           data={data}
