@@ -67,7 +67,7 @@ const dummyData = [
 ];
 
 
-// GET handler for API route
+// GET handler for API route.
 export async function GET() {
   // Return the treeNodes array as a JSON response
   return NextResponse.json(dummyData);
