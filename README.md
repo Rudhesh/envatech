@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Data Visualization Dashboard with MySQL Integration
 
-## Getting Started
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Project Structure](#project-structure)
+- [Setup and Installation](#setup-and-installation)
+- [Environment Variables](#environment-variables)
+- [Database Setup](#database-setup)
+- [Authentication](#authentication)
+- [How It Works](#how-it-works)
+  - [MySQL Database Integration](#mysql-database-integration)
+  - [Graph and DataTable](#graph-and-datatable)
+  - [Authentication with Google and Credentials](#authentication-with-google-and-credentials)
+- [Running the Application](#running-the-application)
+- [License](#license)
 
-First, run the development server:
+## Introduction
+This project is a Data Visualization Dashboard built with Next.js. It allows users to:
 
+- Connect to a MySQL database.
+- Visualize data in the form of tables and graphs.
+- Save and share custom panels.
+- Authenticate using Google OAuth or custom credentials.
+
+## Features
+- Connect to a custom MySQL database.
+- Dynamic data visualization (tables, graphs).
+- Custom panel creation and management.
+- Google and credentials-based authentication (with NextAuth.js).
+- Data filtering with search and time range.
+- Responsive and interactive user interface.
+
+## Technologies
+- **Next.js**: React-based framework for server-side rendering and static site generation.
+- **MySQL**: Relational database for data storage and querying.
+- **NextAuth.js**: Authentication system supporting multiple providers.
+- **React**: Frontend library for building the UI.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **MySQL2**: MySQL client for Node.js.
+- **Chart.js**: Library for rendering graphs and charts.
+- **Redux**: State management library for handling application-wide state.
+
+## Project Structure
 ```bash
+/components
+  /common       # Common components (e.g., Loader, Button)
+  /panel        # Panel components (e.g., Graph, Sidebar)
+  /ui           # UI elements (e.g., Button, Input)
+/pages
+  /api          # API routes (connect to database, authentication)
+  /dashboard    # Dashboard view
+  /auth         # Authentication routes (login, signup)
+/utils          # Utility functions (e.g., MySQL query, database connection)
+
+
+git clone https://github.com/your-repo/data-visualization-dashboard.git
+cd data-visualization-dashboard
+
+
+npm install
+
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# MySQL connection
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_DATABASE=your_database_name
 
-## Learn More
+# NextAuth Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXTAUTH_SECRET=your_nextauth_secret
 
-To learn more about Next.js, take a look at the following resources:
+# NextAuth URLs
+NEXTAUTH_URL=http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Database Setup
 
-## Deploy on Vercel
+CREATE TABLE your_table_name (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value FLOAT NOT NULL,
+    time_stamp DATETIME NOT NULL,
+    status VARCHAR(255)
+);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details...
+
+# Authentication
+- This application uses NextAuth.js for authentication. You can log in using Google OAuth or credentials-based authentication (email/password).
+
+- To configure Google OAuth, create credentials in the Google API Console and add the GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the .env.local file.
+
+# How It Works
+## MySQL Database Integration
+- The DatabaseConnectionForm component allows users to input their database credentials (host, port, user, password) and connect to their own MySQL database. The connection is handled via a serverless API route (/api/connectDatabase) using mysql2/promise.
+
+# Graph and DataTable
+- The Graph component (built using Chart.js) visualizes the data fetched from the database.
+- The DataTable component displays the data in tabular form.
+- Users can filter data by time range and search using custom search queries.
+- Authentication with Google and Credentials
+- The application integrates NextAuth.js for user authentication:
+
+- Google OAuth: Users can sign in with their Google account.
+- Credentials: Users can sign in using an email/password combination.
+- Running the Application
+- Start the Next.js development server:
+
+bash
+Copy code
+npm run dev
+Navigate to http://localhost:3000.
+
+Log in using Google or credentials. You will be redirected to the dashboard where you can:
+
+Connect to your MySQL database.
+Visualize and filter your data in tables and graphs.
+Save and share custom panels.
+
+# License
+
+- This project is licensed under the MIT License. See the LICENSE file for details.
