@@ -4,6 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOpt";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import EditPanel from "./test";
+import FetchTableData from "./fetchTableData";
 
 
 
@@ -18,7 +19,8 @@ export default async function Notification() {
     return (
         <Layout>
             {/* <h1>Notification</h1> */}
-       <EditPanel/>
+            <FetchTableData />
+       {/* <EditPanel/> */}
       </Layout>
     )
 }

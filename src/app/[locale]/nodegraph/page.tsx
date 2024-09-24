@@ -1,8 +1,9 @@
 import Layout from "../../../components/layout";
-import { Rechart } from "./rechart";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOpt";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import DatabaseConnectionForm from "./DatabaseConnectionForm";
+import FetchTableData from "../notification/fetchTableData";
 
 export default async function NodeGraph() {
   const session = await getServerSession(authOptions);
@@ -15,7 +16,9 @@ export default async function NodeGraph() {
   return (
     <Layout>
       <h1>Node-Graph</h1>
-      <Rechart />
+      <DatabaseConnectionForm/>
+      <FetchTableData />
+      {/* <Rechart /> */}
     </Layout>
   );
 }

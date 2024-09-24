@@ -117,8 +117,8 @@ const Dashboards = () => {
           className="layout"
           layout={layout}
           cols={12}
-          rowHeight={530}  // Approx. row height
-          width={5600}  // Adjust the width of the grid container for a responsive layout
+          rowHeight={500}  // Approx. row height
+          width={5000}  // Adjust the width of the grid container for a responsive layout
           onLayoutChange={onLayoutChange} // Update layout on change
           draggableHandle=".card-header"
         >

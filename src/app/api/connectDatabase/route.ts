@@ -1,24 +1,77 @@
-// app/api/connectDatabase/route.ts (App Router)
-import { NextRequest, NextResponse } from 'next/server';
-import { query } from '@/utils/dbsu';
+import { NextResponse } from 'next/server';
+import mysql from 'mysql2/promise';
 
-export async function POST(req: NextRequest) {
+const dbConfig = {
+  host: '',
+  user: '',
+  password: '',
+  database: '',
+};
+
+// Connect to MySQL database
+async function connectToDatabase(credentials: {
+  host: string;
+  user: string;
+  password: string;
+  database: string;
+}) {
   try {
-    const body = await req.json();
-    const { host, user, password, database } = body;
-
-    const results = await query({
-      queryText: 'SELECT * FROM your_table_name LIMIT 1',
-      values: [],
-      host,
-      user,
-      password,
-      database,
-    });
-
-    return NextResponse.json({ data: results });
+    const connection = await mysql.createConnection(credentials);
+    console.log('Connected to database');
+    return connection;
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Failed to connect to the database' }, { status: 500 });
+    console.error('Database connection failed:', error);
+    throw new Error('Failed to connect to the database');
+  }
+}
+
+// Export a named export for each HTTP method
+export async function POST(request: Request) {
+  try {
+    const { host, username, password, database, tableData } = await request.json();
+    console.log(host, username, password, database,tableData )
+    // Update dbConfig with user credentials
+    dbConfig.host = host;
+    dbConfig.user = username;
+    dbConfig.password = password;
+    dbConfig.database = database;
+
+    // Connect to the database
+    const connection = await connectToDatabase(dbConfig);
+
+    // Example query (fetch tables as an example)
+    const [rows] = await connection.query('SHOW TABLES');
+    // await connection.end(); // Close the connection
+
+    return NextResponse.json({ success: true, data: rows });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: error });
+  }
+}
+
+
+
+// GET method to fetch data from a specified table
+export async function GET(request: Request) {
+  try {
+    // Extract table name from query parameters (since GET requests don't have a body)
+    const { searchParams } = new URL(request.url);
+    const tableData = searchParams.get('tableData');
+    
+    if (!tableData) {
+      return NextResponse.json({ success: false, message: 'Table name is required' });
+    }
+
+    // Connect to the database using existing dbConfig
+    const connection = await connectToDatabase(dbConfig);
+
+    // Construct and execute query dynamically
+    const [rows] = await connection.query(`SELECT * FROM ??`, [tableData]);
+    console.log(rows)
+    await connection.end();
+
+    return NextResponse.json({ success: true, data: rows });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: 'Database connection failed', error: error });
   }
 }
