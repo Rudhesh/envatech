@@ -1,0 +1,197 @@
+[33mcommit ac102601cd72a5f81832e9ba7f1a7d877abb270c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:41:18 2024 +0200
+
+    delete database comp
+
+[33mcommit 9908d9a4ccddde7c7cba075ae759732cadcaa3cf[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:36:53 2024 +0200
+
+    delete database comp
+
+[33mcommit 482f9adf0b2cb6ee2af6db8045638efdb11a0df8[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:33:57 2024 +0200
+
+    delete database comp
+
+[33mcommit b8e39b99e0081f08b92e3066f2a96bddecbff461[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:30:57 2024 +0200
+
+    delete database comp
+
+[33mcommit 852692fcf3fb09370d0b11b57d88f2b004b3d577[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:27:31 2024 +0200
+
+    delete tabledata comp
+
+[33mcommit 185eef3459ab300d73e38b8f51032de1c3c38097[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 20:21:05 2024 +0200
+
+    Remove .env file and add it to .gitignore
+
+[33mcommit 76d71600ae2ac0493f131e2d9e172a0d2b2fa66c[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 19:48:51 2024 +0200
+
+    Remove .env file and add it to .gitignore
+
+[33mcommit ab860779e6c76fcb915b6e9d6c333c5a4500e029[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 19:46:42 2024 +0200
+
+    implement mysql connection
+
+[33mcommit 9f93737c29ef2da38e5186ebc2b24b74d7c0259f[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 24 09:52:55 2024 +0200
+
+    implement mysql connection
+
+[33mcommit d8d14094800533bc6684987c65e7b374db63642e[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 23 21:18:42 2024 +0200
+
+    add table hide button in panel
+
+[33mcommit 6eb7fd052dd29fefe2bfd6c44cc7df6051494a5d[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 22 22:39:56 2024 +0200
+
+    fix the dashboard and panel setting
+
+[33mcommit bf7032a3289ddd8acf6f19c35b1a6673237a2424[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Wed Sep 11 21:03:14 2024 +0200
+
+    test search component
+
+[33mcommit 12226a06e5df88ac5b2d3c0ea1fd203af4820a47[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Wed Sep 11 20:50:03 2024 +0200
+
+    test search component
+
+[33mcommit 13cc0876dee6577957e484364bf895fec4a716be[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 10 23:11:40 2024 +0200
+
+    test search component
+
+[33mcommit 6ede18fe6db30f40c6498bfd26ccfcb28430797b[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 10 22:54:26 2024 +0200
+
+    test search component
+
+[33mcommit 6c3f6088b379a65bdfda0bf6e729c676d0b23329[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 10 21:13:49 2024 +0200
+
+    test search component
+
+[33mcommit ecde89a799c43eca72b734abb1b24919bcd29903[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Tue Sep 10 20:43:16 2024 +0200
+
+    test search component
+
+[33mcommit a4afaf15c050245b535bbeab70e5d42a7a01bcdd[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 9 23:38:12 2024 +0200
+
+    test code API
+
+[33mcommit 0f2d28bb1205c00da164245a733765deb55c7058[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 9 21:19:06 2024 +0200
+
+    test code API
+
+[33mcommit 8c9047472a6ee0074936dfab31fc7b1cdd234237[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 9 21:13:05 2024 +0200
+
+    test code API
+
+[33mcommit fa5a94da2e1ac8838ffe3acce1ada4acc8e65fda[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 9 21:00:17 2024 +0200
+
+    test code API
+
+[33mcommit fdac78c6c5d470c3438268d27ed0ad6e2d104f26[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Mon Sep 9 20:32:59 2024 +0200
+
+    test code API
+
+[33mcommit 14d040ccf53d254bd33f1778a76f59cc3edd1ca6[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:55:48 2024 +0200
+
+    recode the project
+
+[33mcommit 956112dd97dfe24d15c2e28c86a503cacbcef08b[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:53:12 2024 +0200
+
+    recode the project
+
+[33mcommit 620909ccdffcd49c9a77207c439083b53f475bc2[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:47:01 2024 +0200
+
+    recode the project
+
+[33mcommit ae11ef909577e8c954ca460ffe29cdd6eaa8a35b[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:45:06 2024 +0200
+
+    recode the project
+
+[33mcommit 58e26529320cec22d8fadf3448c59a7489184ac4[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:42:24 2024 +0200
+
+    recode the project
+
+[33mcommit 45f3b5c09434304bebee5af5aa592549d09d1cb7[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 23:27:46 2024 +0200
+
+    recode the project
+
+[33mcommit e32582f99f2532e348e4e99dae67df238e57ea21[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 00:24:36 2024 +0200
+
+    recode the project
+
+[33mcommit 158da37a26ca4af65b9fa35225ac33fb0796d6bb[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sun Sep 8 00:14:50 2024 +0200
+
+    recode the project
+
+[33mcommit 0eb7f61c1409e639217c3463f15d9e62e0826cea[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Sat Sep 7 23:53:50 2024 +0200
+
+    recode the project
+
+[33mcommit 48a970dcf05bd8fea143c0f33c4e555132adde9c[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Fri Sep 6 00:05:47 2024 +0200
+
+    recode the project
+
+[33mcommit e8568c26897aa8e5b7103eb6aaa76453538c70fd[m
+Author: Rudesh <rudeshdhote@gmail.com>
+Date:   Wed Aug 28 23:45:56 2024 +0200
+
+    Initial commit from Create Next App
