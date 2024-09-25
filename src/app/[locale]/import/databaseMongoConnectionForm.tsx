@@ -23,7 +23,7 @@ const DatabaseMongoConnectionForm = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result.data);
+        console.log("rree",result.data);
         setDataName(result.data);
       } else {
         console.error("Failed to connect to the database");
@@ -34,7 +34,10 @@ const DatabaseMongoConnectionForm = () => {
   };
 
   // If dataName has items, dynamically get the first collection's name
-  const firstCollection = dataName.length > 0 ? dataName[0].name : "";
+  // const firstCollection = dataName.length > 0 ? dataName[0].name : "";
+  const firstCollection = database
+
+  console.log({firstCollection})
   const fetchData = async () => {
     if (!firstCollection) {
       setError("Please enter a collection name");
@@ -44,7 +47,7 @@ const DatabaseMongoConnectionForm = () => {
     try {
       const response = await fetch(`/api/connectMongoDatabase?collectionName=${firstCollection}`);
       const result = await response.json();
-
+console.log({result})
       if (result.success) {
         setData(result.data); // Set the returned documents
         setError(""); // Clear any previous error

@@ -19,7 +19,7 @@ export async function connectToDatabase() {
   const client = new MongoClient(uri);
   await client.connect();
   const db = client.db(dbName);
-
+console.log({db})
   cachedClient = client;
   cachedDb = db;
 
