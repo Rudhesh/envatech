@@ -7,7 +7,6 @@ const DatabaseConnectionForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [database, setDatabase] = useState("");
-  const [tableData, setTableData] = useState(""); // Store fetched table data
   const [dataName, setdataName] = useState<any[]>([]); // Store fetched table data
 
   const handleConnect = async (e: { preventDefault: () => void }) => {

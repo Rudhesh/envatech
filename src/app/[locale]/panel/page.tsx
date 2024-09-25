@@ -13,16 +13,28 @@ interface DataPoint {
   min: number;
   max: string;
   status: string;
+  station_id?: number;  // Optional fields
+  temperature?: number;
+  humidity?: number;
+  wind_speed?: number;
+  wind_direction?: string;
+  rainfall?: number;
+  pressure?: number;
+  timestamp?: string;
+  latitude?: number;
+  longitude?: number;
   // Add other properties from your JSON data if needed
 }
 
 
-const userRawData = async () => {
+const userRawData = async (): Promise<any> => {
   const userRepository = usedataRepository();
-  const data = await userRepository.getAll();
-  return data
+  const result = await userRepository.getAll();
 
-}
+  // Assuming the response has a structure like { message: 'Success', data: [...] }
+  return result;  // Return only the data array
+};
+
 
 
 
@@ -38,7 +50,7 @@ export default async function Panel() {
   return (
     <Layout>
       
-      <EditPanel data={data} />
+      <EditPanel data={data.data} />
     </Layout>
   );
 }
