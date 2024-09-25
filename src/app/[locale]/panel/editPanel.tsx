@@ -42,7 +42,7 @@ interface GraphProps {
 const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
   const router = useRouter();
 
-  const [originalData, setOriginalData] = useState<DataPoint[]>([]);
+  const [originalData, setOriginalData] = useState<any[]>([]);
   const [graphType, setGraphType] = useState("AreaChart");
   const [showTable, setShowTable] = useState(true); // New state to toggle the table
 
