@@ -28,8 +28,7 @@ export default async function Import() {
   
   return (
     <Layout>
-      <h1>Import</h1>
-      <div>{JSON.stringify(data)}</div> 
+      
       <DatabaseMongoConnectionForm/>
     </Layout>
   );

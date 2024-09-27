@@ -46,11 +46,11 @@ export default async function Panel() {
     redirect("/");
   }
   
-  const data = await userRawData();
+   const data = await userRawData();
   return (
     <Layout>
       
-      <EditPanel data={data.data} />
+      <EditPanel data={data.data || [] } />
     </Layout>
   );
 }

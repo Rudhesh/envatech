@@ -45,14 +45,16 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
   const [originalData, setOriginalData] = useState<any[]>([]);
   const [graphType, setGraphType] = useState("AreaChart");
   const [showTable, setShowTable] = useState(true); // New state to toggle the table
+  // const [showData, setShowData] = useState(false); // New state to control data visibility
 
   const filterData = useAppSelector((state) => state.filterData);
+
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  const showData = () => {
     setOriginalData(data);
     dispatch(setFilteredData(data));
-  }, [data, dispatch]);
+  };
 
   const [panelName, setPanelName] = useState("");
 
@@ -80,7 +82,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
 
     const savedPanels = JSON.parse(localStorage.getItem("savedPanels") || "{}");
     savedPanels[uniqueId] = newPanel;
-    console.log({savedPanels})
+    console.log({ savedPanels });
     localStorage.setItem("savedPanels", JSON.stringify(savedPanels));
 
     router.push("/dashboard");
@@ -139,7 +141,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
                   placeholder="Enter New Panel Name"
                   value={name}
                   onChange={(e) => setPanelName(e.target.value)}
-                  style={{ width: "200px"}} // Remove borders
+                  style={{ width: "200px" }} // Remove borders
                 />
               ) : null}
               <Input
@@ -149,19 +151,22 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
                 onChange={(e) => setPanelName(e.target.value)}
                 style={{ width: "200px" }}
               />
-            
-              
 
               <div className="flex">
-              <div className="mr-4">
-              <Button
-                onClick={() => setShowTable((prev) => !prev)} // Toggle the state
-                variant="outline"
-                className="w-full"
-              >
-                {showTable ? "Hide Table" : "Show Table"}
-              </Button>
-            </div>
+                <div className="mr-4">
+                  <Button
+                    onClick={showData} // Toggle showData state
+                    variant="outline"
+                  >
+                    Add dummy data
+                  </Button>
+                  <Button
+                    onClick={() => setShowTable((prev) => !prev)} // Toggle the state
+                    variant="outline"
+                  >
+                    {showTable ? "Hide Table" : "Show Table"}
+                  </Button>
+                </div>
                 <div className="mr-4">
                   <SearchBar onSearch={handleSearch} />
                 </div>
@@ -174,14 +179,16 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
             </ResizablePanel>
             <ResizableHandle withHandle />
 
-           {showTable && <ResizablePanel defaultSize={35}>
-              <Card
-                className="p-4"
-                style={{ height: "100%", overflow: "auto" }}
-              >
-                <DataTable columns={columns} data={filterData.filteredData} />
-              </Card>
-            </ResizablePanel>}
+            {showTable && (
+              <ResizablePanel defaultSize={35}>
+                <Card
+                  className="p-4"
+                  style={{ height: "100%", overflow: "auto" }}
+                >
+                  <DataTable columns={columns} data={filterData.filteredData} />
+                </Card>
+              </ResizablePanel>
+            )}
           </ResizablePanelGroup>
         </ResizablePanel>
         <ResizableHandle withHandle />

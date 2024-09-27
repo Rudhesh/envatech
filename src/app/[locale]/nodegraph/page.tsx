@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import DatabaseConnectionForm from "./DatabaseConnectionForm";
 import FetchTableData from "../notification/fetchTableData";
+import DatabaseMongoConnectionForm from "../import/databaseMongoConnectionForm";
 
 export default async function NodeGraph() {
   const session = await getServerSession(authOptions);
@@ -15,9 +16,10 @@ export default async function NodeGraph() {
 
   return (
     <Layout>
-      <h1>Node-Graph</h1>
+     
       <DatabaseConnectionForm/>
-      <FetchTableData />
+
+      {/* <FetchTableData /> */}
       {/* <Rechart /> */}
     </Layout>
   );

@@ -24,7 +24,7 @@ const getUserss = (
         <Layout>
             { session &&
             <h1>Data-Partion</h1>}
-          <DataPartitionFlow/>
+       
       </Layout>
     )
 }
