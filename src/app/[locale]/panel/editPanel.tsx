@@ -46,18 +46,24 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
   const [graphType, setGraphType] = useState("AreaChart");
   const [showTable, setShowTable] = useState(true); // New state to toggle the table
   // const [showData, setShowData] = useState(false); // New state to control data visibility
+  const [savedPanels, setSavedPanels] = useState<any[]>([]);
+  const [selectedPanel, setSelectedPanel] = useState<any | null>(null); // State to store the selected panel
 
   const filterData = useAppSelector((state) => state.filterData);
 
   const dispatch = useAppDispatch();
 
-  const showData = () => {
-    setOriginalData(data);
-    dispatch(setFilteredData(data));
-  };
+  // const showData = () => {
+  //   setOriginalData(data);
+  //   dispatch(setFilteredData(data));
+  // };
+
+  // useEffect(() => {
+  //   setOriginalData(data);
+  //   dispatch(setFilteredData(data));
+  // }, [data, dispatch]);
 
   const [panelName, setPanelName] = useState("");
-
   useEffect(() => {
     const savedPanel = localStorage.getItem("savedPanel");
     if (savedPanel) {
@@ -76,13 +82,12 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
     const newPanel = {
       id: uniqueId,
       name: panelName,
-      data: filterData,
+      data: filterData || data,
       graphType, // Save the selected graph type
     };
 
     const savedPanels = JSON.parse(localStorage.getItem("savedPanels") || "{}");
     savedPanels[uniqueId] = newPanel;
-    console.log({ savedPanels });
     localStorage.setItem("savedPanels", JSON.stringify(savedPanels));
 
     router.push("/dashboard");
@@ -96,15 +101,49 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
     localStorage.removeItem("savedPanel");
   };
 
-  const handleSearch = (query: string) => {
-    const filtered = originalData.filter(
-      (item) =>
-        item.id.toString().includes(query) ||
-        item.value.toString().includes(query) ||
-        item.time_stamp.includes(query)
-    );
-    dispatch(setFilteredData(filtered));
+  // const handleSearch = (query: string) => {
+  //   const filtered = originalData.filter(
+  //     (item) =>
+  //       item.id.toString().includes(query) ||
+  //       item.value.toString().includes(query) ||
+  //       item.time_stamp.includes(query)
+  //   );
+  //   dispatch(setFilteredData(filtered));
+  // };
+
+  useEffect(() => {
+    loadSavedPanels();
+  }, []);
+
+  // Load saved panels from localStorage
+  const loadSavedPanels = () => {
+    const savedPanelsData = localStorage.getItem("savedPanels");
+    if (savedPanelsData) {
+      const parsedSavedPanels = JSON.parse(savedPanelsData);
+      const panelsArray: any[] = Object.values(parsedSavedPanels).map((panel) => ({
+        ...(panel as any),
+        showGraph: true,
+        graphType: (panel as any).graphType || "AreaChart",
+      }));
+      setSavedPanels(panelsArray);
+    }
   };
+
+
+  const handleSearch = (query: string) => {
+    const filteredPanels = savedPanels.filter(
+      (panel) =>
+        panel.name.toLowerCase().includes(query.toLowerCase()) ||
+        panel.id.toString().includes(query)
+    );
+    if (filteredPanels.length > 0) {
+      const firstMatchedPanel = filteredPanels[0]; // Select the first matched panel
+      setSelectedPanel(firstMatchedPanel); // Set the selected panel to be displayed
+      dispatch(setFilteredData(firstMatchedPanel.data)); // Set the data of the selected panel
+      setGraphType(firstMatchedPanel.graphType || "AreaChart"); // Set the graph type
+    }
+  };
+
 
   const handleTimeRange = (startTime: string, endTime: string) => {
     const filtered = originalData.filter(
@@ -115,19 +154,50 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
     dispatch(setFilteredData(filtered));
   };
 
+  
+  // const renderGraph = () => {
+   
+  //   switch (graphType) {
+  //     case "LineChart":
+  //       return <LineChartGraph data={filterData.filteredData} />;
+  //     case "BarChart":
+  //       return <BarChartGraph data={filterData.filteredData} />;
+  //     case "RadarChart":
+  //       return <RadarChartGraph data={filterData.filteredData} />;
+  //     case "AreaChart":
+  //     default:
+  //       return <AreaChartGraph data={filterData.filteredData} />;
+  //   }
+  // };
+
   const renderGraph = () => {
-    switch (graphType) {
+    if (!selectedPanel) {
+         switch (graphType) {
       case "LineChart":
-        return <LineChartGraph data={filterData.filteredData} />;
+        return <LineChartGraph data={filterData.filteredData || data} name ={name || "No Name"} />;
       case "BarChart":
-        return <BarChartGraph data={filterData.filteredData} />;
+        return <BarChartGraph data={filterData.filteredData || data} />;
       case "RadarChart":
-        return <RadarChartGraph data={filterData.filteredData} />;
+        return <RadarChartGraph data={filterData.filteredData || data} />;
       case "AreaChart":
       default:
-        return <AreaChartGraph data={filterData.filteredData} />;
+        return <AreaChartGraph data={filterData.filteredData || data} />;
+    }
+    }
+
+    switch (selectedPanel.data.graphType) {
+      case "LineChart":
+        return <LineChartGraph data={selectedPanel.data.filteredData}  name ={selectedPanel.name || "No Name"} />;
+      case "BarChart":
+        return <BarChartGraph data={selectedPanel.data.filteredData} />;
+      case "RadarChart":
+        return <RadarChartGraph data={selectedPanel.data.filteredData} />;
+      case "AreaChart":
+      default:
+        return <AreaChartGraph data={selectedPanel.data.filteredData}  name ={selectedPanel.name || "No Name"} />;
     }
   };
+
 
   return (
     <div className="dark:text-white flex h-screen border">
@@ -153,7 +223,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
               />
 
               <div className="flex">
-                <div className="mr-4">
+                {/* <div className="mr-4">
                   <Button
                     onClick={showData} // Toggle showData state
                     variant="outline"
@@ -166,7 +236,7 @@ const EditPanel: React.FC<GraphProps> = ({ data, name }) => {
                   >
                     {showTable ? "Hide Table" : "Show Table"}
                   </Button>
-                </div>
+                </div> */}
                 <div className="mr-4">
                   <SearchBar onSearch={handleSearch} />
                 </div>

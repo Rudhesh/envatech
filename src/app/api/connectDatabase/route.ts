@@ -28,8 +28,8 @@ async function connectToDatabase(credentials: {
 // Export a named export for each HTTP method
 export async function POST(request: Request) {
   try {
-    const { host, username, password, database, tableData } = await request.json();
-    console.log(host, username, password, database,tableData )
+    const { host, username, password, database } = await request.json();
+    console.log(host, username, password, database )
     // Update dbConfig with user credentials
     dbConfig.host = host;
     dbConfig.user = username;

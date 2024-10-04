@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import Layout from "../../../components/layout"
 import axios from "axios";
 import DataPartitionFlow from "./dataPartition";
+import ApiConnectionForm from "./apiConnectionForm";
 
 export default async function DataPartion() {
     const session = await getServerSession();
@@ -22,9 +23,9 @@ const getUserss = (
   
     return (
         <Layout>
-            { session &&
-            <h1>Data-Partion</h1>}
-       
+            {/* { session &&
+            <h1>Data-Partion</h1>} */}
+       <ApiConnectionForm/>
       </Layout>
     )
 }

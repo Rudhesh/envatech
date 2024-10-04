@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import EditPanel from "../../panel/editPanel";
+import { useAppDispatch } from "@/redux/hooks";
+import { setFilteredData } from "@/features/data/filterDataSlice";
 
 
 interface EditPanelPageProps {
@@ -31,10 +33,16 @@ const EditPanelPage = ({ params }: EditPanelPageProps) => {
     }
   };
 
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    
+    dispatch(setFilteredData(panelData?.data?.filteredData));
+  }, [panelData, dispatch]);
+console.log("ccc",panelData?.data?.filteredData)
   if (!panelData) {
     return <div>Loading...</div>;
   }
-
+console.log({panelData})
   return (
     <div>
       <h1 className="py-2">Panel Name: {panelData.name}</h1>

@@ -34,7 +34,7 @@ const DatabaseConnectionForm = () => {
       password,
       database,
     };
-
+console.log({dbCredentials})
     try {
       const response = await fetch("/api/connectDatabase", {
         method: "POST",
@@ -47,6 +47,7 @@ const DatabaseConnectionForm = () => {
       if (response.ok) {
         const result = await response.json();
         setDataName(result.data);
+        console.log(dataName)
         console.log("Connection successful");
       } else {
         console.error("Failed to connect to the database");
@@ -59,7 +60,7 @@ const DatabaseConnectionForm = () => {
   // If dataName has items, dynamically get the first row's keys
   const datapartition = dataName.length > 0 ? Object.keys(dataName[0])[0] : "";
   const firstRowValue = dataName.length > 0 ? dataName[0][datapartition] : "";
-
+console.log({firstRowValue})
   const fetchData = async () => {
     if (!datapartition) {
       setError("Please enter a table name");
