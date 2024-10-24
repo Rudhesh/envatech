@@ -25,12 +25,13 @@ export const POST = async (request: any) => {
 
   try {
     await newUser.save();
-    return new NextResponse("user is registered", { status: 200 });
-  } catch (err: any) {
-    return new NextResponse(err, {
-      status: 500,
-    });
-  }
+  // Respond with a success message
+  return NextResponse.json({ message: "User is registered" }, { status: 200 });
+    
+} catch (err: any) {
+  // Handle errors gracefully and return a JSON error message
+  return NextResponse.json({ error: err.message || "Internal Server Error" }, { status: 500 });
+}
 };
 
 export const GET = async (req: Request, res: NextResponse) => {

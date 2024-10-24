@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 import Loader from "../../../components/common/loader";
 import Image from "next/image";
+import AddUser from "@/components/userManagement/addUser";
 
 type props = {
   title: string;
@@ -114,7 +115,7 @@ const Login = ({ title, button, footer }: props) => {
                 />
                 <input
                   type="password"
-                  className="w-full border border-gray-300 dark:text-white text-black rounded px-2 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+                  className={inputStyles}
                   placeholder="123456789"
                   required
                 />
@@ -123,7 +124,7 @@ const Login = ({ title, button, footer }: props) => {
                   className="flex w-full justify-center rounded bg-[#384D6C] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#303f57] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#303f57]"
                 >
                   {" "}
-                  {button}
+                  Button
                 </button>
                 <p className="text-red-600 text-[16px] mb-4">
                   {error && error}
@@ -137,10 +138,19 @@ const Login = ({ title, button, footer }: props) => {
                 >
                   Forgot Password?
                 </button>
-                {/*  <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </> */}
+                <div className="mt-4">
+                  <button
+                    className="text-sm text-[#384D6C] hover:underline focus:outline-none focus:underline"
+                    onClick={() => router.push(`/${locale}/signup`)}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+                {/* Add Sign Up button */}
+                <div className="mt-4">
+                  <AddUser />{" "}
+                  {/* This will render the AddUser dialog when triggered */}
+                </div>
               </div>
 
               <p className="mt-10 text-center text-sm text-gray-500">

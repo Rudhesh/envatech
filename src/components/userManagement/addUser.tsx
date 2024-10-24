@@ -38,6 +38,7 @@ const AddUser = () => {
 
   async function clientAction(data: any) {
     const result = await addData(data);
+    console.log("result",result)
     if (result) {
       if ("error" in result) {
         toast({

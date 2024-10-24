@@ -48,7 +48,7 @@ export default async function Panel() {
   
    const data = await userRawData();
   return (
-    <Layout>
+    <Layout>         
       
       <EditPanel data={data.data || [] } />
     </Layout>
